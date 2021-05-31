@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 public class TestUpdate {
     public static void main(String[] args) throws SQLException {
-        ResourceBundle bundle = ResourceBundle.getBundle("db");
+        ResourceBundle bundle = ResourceBundle.getBundle("db2");
 
         String url = bundle.getString("db.url");
         String login = bundle.getString("db.login");
