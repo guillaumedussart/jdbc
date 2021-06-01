@@ -13,8 +13,13 @@ public class App {
 		//FournisseurService service = FournisseurService.getSingle(); ==> Couplage faible
 	
 		FournisseurService service = FournisseurService.getSingle();
-		try {
+		/*try {
 			service.create( new Fournisseur( "MTC" ) );
+		} catch ( SQLException e ) {
+			System.err.println(e.getMessage());
+		}*/
+		try {
+			service.getAll();
 		} catch ( SQLException e ) {
 			System.err.println(e.getMessage());
 		}

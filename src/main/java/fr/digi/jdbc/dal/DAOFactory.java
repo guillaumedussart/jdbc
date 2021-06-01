@@ -15,7 +15,7 @@ public final class DAOFactory {
 	
 	static {
 		ResourceBundle bundle = ResourceBundle.getBundle( "db" );
-		STORE_MODE = bundle.getString( "db.properties" );
+		STORE_MODE = bundle.getString( "datastore.mode" );
 	}
 	
 	private DAOFactory() {}

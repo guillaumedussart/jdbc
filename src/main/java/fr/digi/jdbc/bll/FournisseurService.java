@@ -19,6 +19,10 @@ public class FournisseurService {
 		}
 		return single;
 	}
+	public void getAll () throws SQLException {
+		IFournisseurDAO dao = DAOFactory.getFournisseurDAO();
+		System.out.println(dao.findAll());
+	}
 	
 	public void create( Fournisseur fournisseur ) throws SQLException {
 		IFournisseurDAO dao = DAOFactory.getFournisseurDAO();
