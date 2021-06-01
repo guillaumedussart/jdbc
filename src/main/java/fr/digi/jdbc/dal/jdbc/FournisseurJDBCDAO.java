@@ -4,9 +4,7 @@ import fr.digi.jdbc.bo.Fournisseur;
 import fr.digi.jdbc.dal.IFournisseurDAO;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class FournisseurJDBCDAO implements IFournisseurDAO {
@@ -78,8 +76,7 @@ public class FournisseurJDBCDAO implements IFournisseurDAO {
     public void deleteById(Long aLong) throws SQLException {
         Connection connection = ConnectionDB.getSingle().getConnection();
         try (PreparedStatement pst = connection.prepareStatement(DELETE_QUERY)) {
-            pst.setString(1, o.getNom());
-            pst.setString(2, String.valueOf(o.getId()));
+            pst.setString(1, String.valueOf(aLong));
             pst.executeUpdate();
         }
     }
