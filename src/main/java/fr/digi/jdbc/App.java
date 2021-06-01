@@ -18,10 +18,23 @@ public class App {
 		} catch ( SQLException e ) {
 			System.err.println(e.getMessage());
 		}*/
-		try {
+		/*try {
 			service.getAll();
 		} catch ( SQLException e ) {
 			System.err.println(e.getMessage());
+		}*/
+		/*try {
+			System.out.println(2L);
+			service.getOne(1L);
+		} catch ( SQLException e ) {
+			System.err.println(e.getMessage());
+		}*/
+
+		try{
+			Fournisseur updateFournisseur = new Fournisseur(2L,"FDM SAS");
+			service.update(updateFournisseur);
+		}catch(SQLException e){
+
 		}
 	}
 }
