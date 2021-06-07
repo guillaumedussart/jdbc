@@ -1,50 +1,59 @@
 package fr.digi.jdbc.bo;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *  article
  *
  */
 public class Article implements Serializable {
-    private int id;
+
+
+    private Long id;
     private String ref;
     private String designation;
     private double prix;
-    private List<Fournisseur> fournisseurs;
+    private Long id_fou;
+    private Fournisseur fournisseur;
 
-    public Article(int id, String ref, String designation, double prix, List<Fournisseur> fournisseurs) {
+    public Article(String ref, String designation, double prix, Fournisseur fournisseurs) {
+
+        this.ref = ref;
+        this.designation = designation;
+        this.prix = prix;
+        this.fournisseur = fournisseurs;
+    }
+
+    public Article(Long id, String ref, String designation, double prix) {
         this.id = id;
         this.ref = ref;
         this.designation = designation;
         this.prix = prix;
-        this.fournisseurs = fournisseurs;
     }
 
-    public Article(int id, String ref, String designation, double prix) {
-        this.id = id;
-        this.ref = ref;
-        this.designation = designation;
-        this.prix = prix;
-    }
-
-    public Article(int id, String ref, String designation) {
+    public Article(Long id, String ref, String designation) {
         this.id = id;
         this.ref = ref;
         this.designation = designation;
     }
 
-    public Article(int id, String ref) {
+    public Article(Long id, String ref) {
         this.id = id;
         this.ref = ref;
     }
 
-    public Article(int id) {
+    public Article(Long id) {
         this.id = id;
     }
 
     public Article() {
+    }
+
+    public Article(String ref, String designation, double prix, Long id_fou) {
+        this.ref = ref;
+        this.designation = designation;
+        this.prix = prix;
+        this.id_fou = id_fou;
     }
 
     /**
@@ -52,7 +61,7 @@ public class Article implements Serializable {
      *
      * @return id
      */
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 
@@ -61,7 +70,7 @@ public class Article implements Serializable {
      *
      * @param id
      */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -122,18 +131,36 @@ public class Article implements Serializable {
     /**
      * get field
      *
-     * @return fournisseurs
+     * @return fournisseur
      */
-    public List<Fournisseur> getFournisseurs() {
-        return this.fournisseurs;
+    public Fournisseur getFournisseur() {
+        return this.fournisseur;
     }
 
     /**
      * set field
      *
-     * @param fournisseurs
+     * @param fournisseur
      */
-    public void setFournisseurs(List<Fournisseur> fournisseurs) {
-        this.fournisseurs = fournisseurs;
+    public void setFournisseur(Fournisseur fournisseur) {
+        this.fournisseur = fournisseur;
+    }
+
+    /**
+     * get field
+     *
+     * @return id_fou
+     */
+    public Long getId_fou() {
+        return this.id_fou;
+    }
+
+    /**
+     * set field
+     *
+     * @param id_fou
+     */
+    public void setId_fou(Long id_fou) {
+        this.id_fou = id_fou;
     }
 }

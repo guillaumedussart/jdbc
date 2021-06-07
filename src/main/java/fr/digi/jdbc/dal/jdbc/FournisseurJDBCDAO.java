@@ -14,11 +14,19 @@ public class FournisseurJDBCDAO implements IFournisseurDAO {
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM FOURNISSEUR WHERE ID = ?";
     private static final String UPDATE_QUERY = "UPDATE FOURNISSEUR SET NOM = ? WHERE ID = ?";
     private static final String DELETE_QUERY = "DELETE FROM FOURNISSEUR WHERE ID = ?";
+    private static Connection connection;
+
+    static {
+        try {
+            connection = ConnectionDB.getSingle().getConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     @Override
     public void create(Fournisseur o) throws SQLException {
 
-        Connection connection = ConnectionDB.getSingle().getConnection();
 
         try (PreparedStatement pst = connection.prepareStatement(INSERT_QUERY)) {
             pst.setString(1, o.getNom());
@@ -29,23 +37,22 @@ public class FournisseurJDBCDAO implements IFournisseurDAO {
     @Override
     public Fournisseur findById(Long aLong) throws SQLException {
 
-        Connection connection = ConnectionDB.getSingle().getConnection();
 
         try (PreparedStatement pst = connection.prepareStatement(FIND_BY_ID_QUERY)) {
             pst.setLong(1, aLong);
-            ResultSet rs = pst.executeQuery();
+            ResultSet result = pst.executeQuery();
             Fournisseur fournisseur = null;
-            while (rs.next()) {
-                fournisseur = new Fournisseur(rs.getLong("ID"), rs.getString("NOM"));
+            if (result.next() && result != null) {
+                fournisseur = new Fournisseur(result.getLong("ID"), result.getString("NOM"));
             }
             return fournisseur;
+
         }
     }
 
     @Override
     public Set<Fournisseur> findAll() throws SQLException {
 
-        Connection connection = ConnectionDB.getSingle().getConnection();
         Statement statement = connection.createStatement();
 
         try (ResultSet result = statement.executeQuery(FIND_ALL_QUERY)) {
@@ -59,7 +66,7 @@ public class FournisseurJDBCDAO implements IFournisseurDAO {
 
     @Override
     public void update(Fournisseur o) throws SQLException {
-        Connection connection = ConnectionDB.getSingle().getConnection();
+
         try (PreparedStatement pst = connection.prepareStatement(UPDATE_QUERY)) {
             pst.setString(1, o.getNom());
             pst.setString(2, String.valueOf(o.getId()));
@@ -74,7 +81,7 @@ public class FournisseurJDBCDAO implements IFournisseurDAO {
 
     @Override
     public void deleteById(Long aLong) throws SQLException {
-        Connection connection = ConnectionDB.getSingle().getConnection();
+
         try (PreparedStatement pst = connection.prepareStatement(DELETE_QUERY)) {
             pst.setString(1, String.valueOf(aLong));
             pst.executeUpdate();
